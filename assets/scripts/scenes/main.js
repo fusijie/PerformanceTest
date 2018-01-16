@@ -1,4 +1,4 @@
-const config = require("config");
+let config = require("config");
 
 cc.Class({
     extends: cc.Component,
@@ -10,9 +10,10 @@ cc.Class({
 
     // use this for initialization
     onLoad: function () {
+        config.CURRENT_CASE = -1;
         this.menuItem.parent = null;
-        for (let i = 0; i < config.TESTCASE.length; i++) {
-            let testCaseInfo = config.TESTCASE[i];
+        for (let i = 0; i < config.TEST_CASE.length; i++) {
+            let testCaseInfo = config.TEST_CASE[i];
             let menuItem = cc.instantiate(this.menuItem);
             let name = menuItem.getChildByName("name");
             name.getComponent(cc.Label).string = `${i + 1}. ${testCaseInfo.name}`;
@@ -23,11 +24,12 @@ cc.Class({
 
     onClickTestCase: function (_, data) {
         let testCaseIndex = parseInt(data);
-        let testCaseInfo = config.TESTCASE[testCaseIndex];
+        let testCaseInfo = config.TEST_CASE[testCaseIndex];
         if (!testCaseInfo) {
             cc.warn("Error test case.");
             return;
         }
+        config.CURRENT_CASE = testCaseIndex;
         cc.director.loadScene(testCaseInfo.scene);
     },
     
