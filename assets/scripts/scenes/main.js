@@ -31,6 +31,7 @@ cc.Class({
             let name = menuItem.getChildByName("name");
             let toggle = menuItem.getChildByName("toggle");
             name.getComponent(cc.Label).string = `${i + 1}. ${testCaseInfo.name}`;
+            name.color = testCaseInfo.scene === "" ? cc.Color.RED : cc.Color.BLACK;
             toggle.getComponent(cc.Toggle).isChecked = testCaseInfo.auto;
             menuItem.getComponent(cc.Button).clickEvents[0].customEventData = testCaseInfo.index;
             menuItem.parent = this.scrollViewContent;
