@@ -11,15 +11,28 @@ cc.Class({
     // use this for initialization
     onLoad: function () {
         config.CURRENT_CASE = -1;
-        this.menuItem.parent = null;
+        config.PLATFORM_TEST_CASE = [];
         for (let i = 0; i < config.TEST_CASE.length; i++) {
             let testCaseInfo = config.TEST_CASE[i];
+            testCaseInfo.index = i;
+            if (cc.sys.os === cc.sys.OS_ANDROID || cc.sys.os === cc.sys.OS_IOS) {
+                if (!testCaseInfo.platform || testCaseInfo.platform === cc.sys.os) {
+                    config.PLATFORM_TEST_CASE.push(testCaseInfo);
+                }    
+            }else {
+                config.PLATFORM_TEST_CASE = config.TEST_CASE;
+            }
+        }
+
+        this.menuItem.parent = null;
+        for (let i = 0; i < config.PLATFORM_TEST_CASE.length; i++) {
+            let testCaseInfo = config.PLATFORM_TEST_CASE[i];
             let menuItem = cc.instantiate(this.menuItem);
             let name = menuItem.getChildByName("name");
             let toggle = menuItem.getChildByName("toggle");
             name.getComponent(cc.Label).string = `${i + 1}. ${testCaseInfo.name}`;
             toggle.getComponent(cc.Toggle).isChecked = testCaseInfo.auto;
-            menuItem.getComponent(cc.Button).clickEvents[0].customEventData = i;
+            menuItem.getComponent(cc.Button).clickEvents[0].customEventData = testCaseInfo.index;
             menuItem.parent = this.scrollViewContent;
         }
     },
