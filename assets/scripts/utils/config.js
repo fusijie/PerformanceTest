@@ -59,6 +59,27 @@ config.TEST_CASE = [
         args: { depth: 4, countPerDepth: 6},
         auto: true,
     },
+    {
+        name: "Bunny Active/Inactive Test",
+        scene: "bunnyActiveTest",
+        args: { depth: 5, countPerDepth: 5 },
+        auto: true,
+    },
+    {
+        name: "Bunny Transform Animation Test",
+        scene: "",
+        auto: true,
+    },
+    {
+        name: "Bunny Frame Animation Test",
+        scene: "",
+        auto: true,
+    },
+    {
+        name: "Bunny Transform Action Test",
+        scene: "",
+        auto: true,
+    },
 ];
 
 config.CURRENT_CASE = -1;
