@@ -51,10 +51,10 @@ cc.Class({
         minX = -maxX;
         minY = -maxY;
 
-        totalCount = 2500;
+        totalCount = config.SCENE_ARGS.totalCount;
         count = 0;
         amount = 50;
-        dynamicCount = 100;
+        dynamicCount = config.SCENE_ARGS.dynamicCount;
     },
 
     // called every frame, uncomment this function to activate update callback

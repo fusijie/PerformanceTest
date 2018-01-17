@@ -50,6 +50,13 @@ config.TEST_CASE = [
     {
         name: "Bunny Dynamic Test",
         scene: "bunnyDynamicTest",
+        args: { totalCount: 2500, dynamicCount: 100},
+        auto: true,
+    },
+    {
+        name: "Bunny Tree Test",
+        scene: "bunnyTreeTest",
+        args: { depth: 4, countPerDepth: 7},
         auto: true,
     },
 ];
