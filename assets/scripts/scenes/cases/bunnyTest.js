@@ -2,17 +2,16 @@ const baseScene = require("baseScene");
 const config = require("config");
 
 let bunnyType = 0;
-let gravity = 0.5;
+let gravity = 0;
 
 let maxX = 0;
 let minX = 0;
 let maxY = 0;
 let minY = 0;
 
-let startBunnyCount = 2;
 let isAdding = false;
 let count = 0;
-let amount = 100;
+let amount = 0;
 
 cc.Class({
     extends: baseScene,
@@ -28,31 +27,7 @@ cc.Class({
 
         this.number.node.zIndex = config.HIGHEST_ZINDEX;
 
-        maxX = cc.winSize.width / 2;
-        maxY = cc.winSize.height / 2;
-        minX = -maxX;
-        minY = -maxY;
-
         this.reset();
-
-        for (let i = 0; i < startBunnyCount; i++) {
-            let bunny = new cc.Node();
-            let bunnysp = bunny.addComponent(cc.Sprite);
-            bunnysp.spriteFrame = this.currentFrame;
-            bunny.speedX = Math.random() * 10;
-            bunny.speedY = (Math.random() * 10) - 5;
-            bunny.x = minX + 10;
-            bunny.y = maxY * 0.7;
-
-            bunny.anchorX = 0.5;
-            bunny.anchorY = 1;
-
-            this.bunnys.push(bunny);
-
-            this.node.addChild(bunny);
-        }
-        count = startBunnyCount;
-        this.number.string = count;
 
         this.node.on('touchstart', () => {
             isAdding = true;
@@ -82,6 +57,17 @@ cc.Class({
         this.bunnyFrames.push(new cc.SpriteFrame(this.tex, cc.rect(2, 2, 26, 37)));
         this.currentFrame = this.bunnyFrames[0];
 
+        bunnyType = 0;
+        gravity = 0.5;
+
+        maxX = cc.winSize.width / 2;
+        maxY = cc.winSize.height / 2;
+        minX = -maxX;
+        minY = -maxY;
+
+        isAdding = false;
+        count = 0;
+        amount = 100;
     },
 
     // called every frame, uncomment this function to activate update callback

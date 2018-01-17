@@ -16,7 +16,9 @@ cc.Class({
             let testCaseInfo = config.TEST_CASE[i];
             let menuItem = cc.instantiate(this.menuItem);
             let name = menuItem.getChildByName("name");
+            let toggle = menuItem.getChildByName("toggle");
             name.getComponent(cc.Label).string = `${i + 1}. ${testCaseInfo.name}`;
+            toggle.getComponent(cc.Toggle).isChecked = testCaseInfo.auto;
             menuItem.getComponent(cc.Button).clickEvents[0].customEventData = i;
             menuItem.parent = this.scrollViewContent;
         }
