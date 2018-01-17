@@ -56,7 +56,7 @@ config.TEST_CASE = [
     {
         name: "Bunny Tree Test",
         scene: "bunnyTreeTest",
-        args: { depth: 4, countPerDepth: 7},
+        args: { depth: 4, countPerDepth: 6},
         auto: true,
     },
 ];
