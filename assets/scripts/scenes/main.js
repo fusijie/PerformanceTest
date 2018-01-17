@@ -30,6 +30,7 @@ cc.Class({
             return;
         }
         config.CURRENT_CASE = testCaseIndex;
+        config.SCENE_ARGS = testCaseInfo.args;
         cc.director.loadScene(testCaseInfo.scene);
     },
     

@@ -29,7 +29,7 @@ cc.Class({
     resetTestConfig: function () {
         this.isTesting = false;
         this.beginTestTime = 3;
-        this.testDurationTime = 3;
+        this.testDurationTime = 10;
         this.beforeUpdateTime = 0;
         this.afterDrawTime = 0;
         this.durationTimeArr = [];
@@ -49,12 +49,12 @@ cc.Class({
             let testBtn = this._createButton("Test", spriteFrame, this.node, subScriptName, "onClickTest");
             testBtn.parent = this.node;
             testBtn.x = 360;
-            testBtn.y = 230;
+            testBtn.y = 180;
             testBtn.zIndex = config.HIGHEST_ZINDEX;
             let closeBtn = this._createButton("Back", spriteFrame, this.node, subScriptName, "onClickClose");
             closeBtn.parent = this.node;
             closeBtn.x = 360;
-            closeBtn.y = 180;
+            closeBtn.y = 130;
             closeBtn.zIndex = config.HIGHEST_ZINDEX;
         });
 
@@ -106,7 +106,9 @@ cc.Class({
             totalValue += value;
         }
         avgValue = (totalValue / this.durationTimeArr.length).toFixed(0);
-        result += `max: ${maxValue}, min: ${minValue}, avg: ${avgValue}`;
+        let avgFps = Math.min(1000 / avgValue , 60);
+        avgFps = Math.max(avgFps, 0).toFixed(0);
+        result += `max time: ${maxValue}, min time: ${minValue}, avg fps: ${avgFps}`;
         this.labelResult.getComponent(cc.Label).string = result;
     },
 
