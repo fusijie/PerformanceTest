@@ -91,4 +91,12 @@ config.HIGHEST_ZINDEX = 99999999;
 
 config.SCENE_ARGS = null;
 
+config.IS_AUTO_TESTING = false;
+
+config.AUTO_CASE_CURSOR = 0;
+
+config.AUTO_TEST_RESULT = [];
+
+config.AUTO_TEST_POST_URL = "http://192.168.54.63:30000/upload_result";
+
 module.exports = config;

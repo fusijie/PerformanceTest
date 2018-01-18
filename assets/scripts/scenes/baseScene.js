@@ -1,4 +1,5 @@
-const config = require("config");
+let config = require("config");
+const utils = require("utils");
 
 cc.Class({
     extends: cc.Component,
@@ -10,7 +11,13 @@ cc.Class({
     // use this for initialization
     onLoad: function (subScriptName) {
         this.resetTestConfig();
-        this.createUI(subScriptName);
+        if (!config.IS_AUTO_TESTING) {
+            this.createUI(subScriptName);    
+        }else {
+            this.scheduleOnce(()=>{
+                this.startTest();
+            }, this.beginTestTime);
+        }
         cc.director.on(cc.Director.EVENT_BEFORE_UPDATE, ()=>{
             if (!this.isTesting) {
                 return;
@@ -18,7 +25,7 @@ cc.Class({
             this.beforeUpdateTime = Date.now();
         });
         cc.director.on(cc.Director.EVENT_AFTER_DRAW, ()=>{
-            if (!this.isTesting) {
+            if (!this.isTesting || this.beforeUpdateTime === 0) {
                 return;
             }
             this.afterDrawTime = Date.now();
@@ -74,7 +81,9 @@ cc.Class({
         }
         this.resetTestConfig();
         this.isTesting = true;
-        this.labelResult.getComponent(cc.Label).string = "testing...";
+        if (!config.IS_AUTO_TESTING) {
+            this.labelResult.getComponent(cc.Label).string = "testing...";    
+        }
         this.scheduleOnce(()=>{
             this.isTesting = false;
             this._calculateReuslt();
@@ -109,7 +118,27 @@ cc.Class({
         let avgFps = Math.min(1000 / avgValue , 60);
         avgFps = Math.max(avgFps, 0).toFixed(0);
         result += `max time: ${maxValue}, min time: ${minValue}, avg fps: ${avgFps}`;
-        this.labelResult.getComponent(cc.Label).string = result;
+        if (config.IS_AUTO_TESTING) {
+            let testCaseInfo = config.TEST_CASE[config.CURRENT_CASE];
+            config.AUTO_TEST_RESULT[testCaseInfo.index] = {
+                maxTime: maxValue,
+                minTime: minValue,
+                avgFps: avgFps
+            }
+            config.AUTO_CASE_CURSOR ++;
+            testCaseInfo = config.AUTO_TEST_CASE[config.AUTO_CASE_CURSOR];
+            if (testCaseInfo) {
+                config.CURRENT_CASE = testCaseInfo.index;
+                config.SCENE_ARGS = testCaseInfo.args;
+                cc.director.loadScene(testCaseInfo.scene);
+            }else {
+                cc.director.loadScene("main");
+                cc.log(config.AUTO_TEST_RESULT);
+                utils.post(config.AUTO_TEST_POST_URL, config.AUTO_TEST_RESULT);
+            }
+        }else {
+            this.labelResult.getComponent(cc.Label).string = result;
+        }
     },
 
     _createLabel: function (string, color, fontSize) {

@@ -49,5 +49,23 @@ cc.Class({
         config.SCENE_ARGS = testCaseInfo.args;
         cc.director.loadScene(testCaseInfo.scene);
     },
+
+    onClickAutoTest: function () {
+        config.IS_AUTO_TESTING = true;
+        config.AUTO_CASE_CURSOR = 0;
+        config.AUTO_TEST_CASE = [];
+        for (let i = 0; i < config.PLATFORM_TEST_CASE.length; i++) {
+            let testCaseInfo = config.PLATFORM_TEST_CASE[i];
+            if (testCaseInfo.auto) {
+                config.AUTO_TEST_CASE.push(testCaseInfo);
+            }
+        }
+        if (config.AUTO_TEST_CASE.length) {
+            let testCaseInfo = config.AUTO_TEST_CASE[config.AUTO_CASE_CURSOR];
+            config.CURRENT_CASE = testCaseInfo.index;
+            config.SCENE_ARGS = testCaseInfo.args;
+            cc.director.loadScene(testCaseInfo.scene);
+        }
+    },
     
 });

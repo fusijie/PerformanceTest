@@ -1,5 +1,5 @@
 const baseScene = require("baseScene");
-const config = require("config");
+let config = require("config");
 
 let bunnyType = 0;
 
