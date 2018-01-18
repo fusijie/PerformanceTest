@@ -21,18 +21,18 @@
         // 基于准备好的dom，初始化echarts实例
         var charts = [];
         for (i = 0; i < platforms.length; i++) {
-            charts.push(echarts.init(document.getElementById(platforms[i].replace(/\s+/g, "") + '_chart')));
+            charts.push(echarts.init(document.getElementById(platforms[i].replace(/\s+/g, "") + "_chart")));
         }
 
         // 指定图表的配置项和数据
         for (i = 0; i < charts.length; i++) {
             var option = {
                 title: {
-                    text: 'CocosCreator Performance Test' + "(" + platforms[i] + ")"
+                    text: "CocosCreator Performance Test" + "(" + platforms[i] + ")"
                 },
                 tooltip: {},
                 legend: {
-                    data: ['FPS']
+                    data: ["FPS"]
                 },
                 xAxis: {
                     data: []
@@ -42,8 +42,8 @@
                     min: 0
                 },
                 series: [{
-                    name: 'FPS',
-                    type: 'line',
+                    name: "FPS",
+                    type: "line",
                     data: []
                 }]
             };
@@ -53,7 +53,7 @@
             charts[i].showLoading();
         }
 
-        $.post('http://localhost:30000/get_result').done(function (data) {
+        $.post("http://localhost:30000/get_result").done(function (data) {
             var i, j, k;
             var platform_data = [];
             var xAxisData = [];
@@ -99,11 +99,11 @@
                 charts[k].hideLoading();
                 charts[k].setOption({
                     title: {
-                        text: 'CocosCreator Performance Test' + "(" + platforms[k] + ")"
+                        text: "CocosCreator Performance Test" + "(" + platforms[k] + ")"
                     },
                     tooltip: {},
                     legend: {
-                        data: ['FPS']
+                        data: ["FPS"]
                     },
                     xAxis: {
                         data: xAxisData[k]
@@ -113,8 +113,8 @@
                         min: 0
                     },
                     series: [{
-                        name: 'FPS',
-                        type: 'line',
+                        name: "FPS",
+                        type: "line",
                         data: seriesData[k]
                     }]
                 });
