@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>CocosCreator Performance Test</title>
+    <!-- 引入 echarts.js -->
+    <script src="echarts.min.js"></script>
+    <script src="jquery-3.2.1.min.js"></script>
+</head>
+
+<body>
+    <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+    <div id="OSX_chart" style="width: 600px;height:400px;"></div>
+    <div id="Windows_chart" style="width: 600px;height:400px;"></div>
+    <div id="iOS_chart" style="width: 600px;height:400px;"></div>
+    <div id="Android_chart" style="width: 600px;height:400px;"></div>
+    <script type="text/javascript">
+        var i = 0;
+        var platforms = ["OS X", "Windows", "iOS", "Android"];
+        // 基于准备好的dom，初始化echarts实例
+        var charts = [];
+        for (i = 0; i < platforms.length; i++) {
+            charts.push(echarts.init(document.getElementById(platforms[i].replace(/\s+/g, "") + '_chart')));
+        }
+
+        // 指定图表的配置项和数据
+        for (i = 0; i < charts.length; i++) {
+            var option = {
+                title: {
+                    text: 'CocosCreator Performance Test' + "(" + platforms[i] + ")"
+                },
+                tooltip: {},
+                legend: {
+                    data: ['FPS']
+                },
+                xAxis: {
+                    data: []
+                },
+                yAxis: {
+                    max: 60,
+                    min: 0
+                },
+                series: [{
+                    name: 'FPS',
+                    type: 'line',
+                    data: []
+                }]
+            };
+
+            // 使用刚指定的配置项和数据显示图表。
+            charts[i].setOption(option);
+            charts[i].showLoading();
+        }
+
+        $.post('http://localhost:30000/get_result').done(function (data) {
+            var i, j, k;
+            var platform_data = [];
+            var xAxisData = [];
+            var seriesData = [];
+            for (i = 0; i < platforms.length; i++) {
+                platform_data[i] = [];
+                xAxisData[i] = [];
+                seriesData[i] = [];
+            }
+            for (i = 0; i < data.length; i++) {
+                for (j = 0; j < platforms.length; j++) {
+                    if (data[i].platform === platforms[j]) {
+                        platform_data[j].push(data[i]);
+                        break;
+                    }
+                }
+            }
+            for (i = 0; i < platform_data.length; i++) {
+                platform_data[i].sort((a, b) => {return a - b;});
+            }
+            
+            for (k = 0; k < platforms.length; k++) {
+                for (i = 0; i < platform_data[k].length; i++) {
+                    var time = new Date(platform_data[k][i].time);
+                    var time_str = time.getFullYear() + "/" + (time.getMonth() + 1) + "/" + time.getDate();
+                    time_str += "\n" + time.getHours() + ":" + time.getMinutes() + ":" + time.getSeconds();
+                    xAxisData[k].push(time_str);
+                    var find_data = false;
+                    for (j = 0; j < platform_data[k][i].data.length; j++) {
+                        var _data = platform_data[k][i].data[j];
+                        if (!_data) {
+                            continue;
+                        }
+                        if (_data.name === "Bunny Tree Test") {
+                            seriesData[k].push(_data.avgFps);
+                            find_data = true;
+                        }
+                    }
+                    if (!find_data) {
+                        seriesData[k].push(0);
+                    }
+                }
+                charts[k].hideLoading();
+                charts[k].setOption({
+                    title: {
+                        text: 'CocosCreator Performance Test' + "(" + platforms[k] + ")"
+                    },
+                    tooltip: {},
+                    legend: {
+                        data: ['FPS']
+                    },
+                    xAxis: {
+                        data: xAxisData[k]
+                    },
+                    yAxis: {
+                        max: 60,
+                        min: 0
+                    },
+                    series: [{
+                        name: 'FPS',
+                        type: 'line',
+                        data: seriesData[k]
+                    }]
+                });
+            }
+        });
+
+    </script>
+</body>
+
+</html>
