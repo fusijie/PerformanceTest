@@ -48,7 +48,7 @@ config.TEST_CASE = [
         auto: true, 
     },
     {
-        name: "Bunny Dynamic Test",
+        name: "Bunny Add/Remove Test",
         scene: "bunnyDynamicTest",
         args: { totalCount: 2500, dynamicCount: 100},
         auto: true,
@@ -67,17 +67,20 @@ config.TEST_CASE = [
     },
     {
         name: "Bunny Transform Animation Test",
-        scene: "",
+        scene: "bunnyTransformAnimationTest",
+        args: { count: 2000 },
         auto: true,
     },
     {
         name: "Bunny Frame Animation Test",
-        scene: "",
+        scene: "bunnyFrameAnimationTest",
+        args: { count: 2000 },
         auto: true,
     },
     {
         name: "Bunny Transform Action Test",
-        scene: "",
+        scene: "bunnyTransformActionTest",
+        args: { count: 2000 },
         auto: true,
     },
 ];
