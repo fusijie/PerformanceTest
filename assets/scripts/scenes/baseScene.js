@@ -120,7 +120,8 @@ cc.Class({
         result += `max time: ${maxValue}, min time: ${minValue}, avg fps: ${avgFps}`;
         if (config.IS_AUTO_TESTING) {
             let testCaseInfo = config.TEST_CASE[config.CURRENT_CASE];
-            config.AUTO_TEST_RESULT[testCaseInfo.index] = {
+            config.AUTO_TEST_RESULT.data[testCaseInfo.index] = {
+                name: testCaseInfo.name,
                 maxTime: maxValue,
                 minTime: minValue,
                 avgFps: avgFps

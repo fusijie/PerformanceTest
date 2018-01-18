@@ -22,7 +22,7 @@ config.TEST_CASE = [
         auto: true, 
     },
     { 
-        name: "Bunny Test(Vivo Y66, Default, 1500)", 
+        name: "Bunny Test(Vivo Y66, Chrome, 1500)", 
         scene: "bunnyFixedCountTest", 
         args: { count:  1500 }, 
         platform: cc.sys.OS_ANDROID, 
@@ -41,7 +41,7 @@ config.TEST_CASE = [
         auto: true, 
     },
     { 
-        name: "Prefab Bunny Test(Vivo Y66, Default, 1500)", 
+        name: "Prefab Bunny Test(Vivo Y66, Chrome, 1500)", 
         scene: "prefabBunnyFixedCountTest", 
         args: { count: 1500 }, 
         platform: cc.sys.OS_ANDROID,
@@ -95,7 +95,7 @@ config.IS_AUTO_TESTING = false;
 
 config.AUTO_CASE_CURSOR = 0;
 
-config.AUTO_TEST_RESULT = [];
+config.AUTO_TEST_RESULT = {};
 
 config.AUTO_TEST_POST_URL = "http://192.168.54.63:30000/upload_result";
 

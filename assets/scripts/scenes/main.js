@@ -54,6 +54,10 @@ cc.Class({
         config.IS_AUTO_TESTING = true;
         config.AUTO_CASE_CURSOR = 0;
         config.AUTO_TEST_CASE = [];
+        config.AUTO_TEST_RESULT = {};
+        config.AUTO_TEST_RESULT.platform = cc.sys.os;
+        config.AUTO_TEST_RESULT.time = Date.now();
+        config.AUTO_TEST_RESULT.data = [];
         for (let i = 0; i < config.PLATFORM_TEST_CASE.length; i++) {
             let testCaseInfo = config.PLATFORM_TEST_CASE[i];
             if (testCaseInfo.auto) {
