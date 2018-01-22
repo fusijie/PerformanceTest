@@ -32,7 +32,7 @@
                 },
                 tooltip: {},
                 legend: {
-                    data: ["FPS"]
+                    data: []
                 },
                 xAxis: {
                     data: []
@@ -41,11 +41,7 @@
                     max: 60,
                     min: 0
                 },
-                series: [{
-                    name: "FPS",
-                    type: "line",
-                    data: []
-                }]
+                series: []
             };
 
             // 使用刚指定的配置项和数据显示图表。
@@ -54,14 +50,20 @@
         }
 
         $.post("http://localhost:30000/get_result").done(function (data) {
-            var i, j, k;
+            data = [{"platform":"OS X","time":1516264431454,"data":[null,{"name":"Bunny Test(iPhone 6, Safari, 2600)","maxTime":14,"minTime":0,"avgFps":"60"},{"name":"Bunny Test(Vivo Y66, Chrome, 1500)","maxTime":8,"minTime":0,"avgFps":"60"},null,{"name":"Prefab Bunny Test(iPhone 6, Safari, 2600)","maxTime":9,"minTime":0,"avgFps":"60"},{"name":"Prefab Bunny Test(Vivo Y66, Chrome, 1500)","maxTime":8,"minTime":0,"avgFps":"60"},{"name":"Bunny Add / Remove Test","maxTime":44,"minTime":0,"avgFps":"59"},{"name":"Bunny Tree Test","maxTime":19,"minTime":0,"avgFps":"60"},{"name":"Bunny Active / Inactive Test","maxTime":18,"minTime":0,"avgFps":"60"},{"name":"Bunny Transform Animation Test","maxTime":13,"minTime":0,"avgFps":"60"},{"name":"Bunny Frame Animation Test","maxTime":8,"minTime":0,"avgFps":"60"},{"name":"Bunny Transform Action Test","maxTime":14,"minTime":0,"avgFps":"60"}]},{"platform":"iOS","time":1516269854539,"data":[null,{"name":"Bunny Test(iPhone 6, Safari, 2600)","maxTime":39,"minTime":0,"avgFps":"50"},null,null,{"name":"Prefab Bunny Test(iPhone 6, Safari, 2600)","maxTime":35,"minTime":0,"avgFps":"42"},null,{"name":"Bunny Add / Remove Test","maxTime":40,"minTime":0,"avgFps":"43"},{"name":"Bunny Tree Test","maxTime":41,"minTime":0,"avgFps":"34"},{"name":"Bunny Active / Inactive Test","maxTime":29,"minTime":0,"avgFps":"45"},{"name":"Bunny Transform Animation Test","maxTime":46,"minTime":0,"avgFps":"32"},{"name":"Bunny Frame Animation Test","maxTime":30,"minTime":0,"avgFps":"60"},{"name":"Bunny Transform Action Test","maxTime":61,"minTime":0,"avgFps":"30"}]},{"platform":"Android","time":1516269856638,"data":[null,null,{"name":"Bunny Test(Vivo Y66, Chrome, 1500)","maxTime":52,"minTime":0,"avgFps":"28"},null,null,{"name":"Prefab Bunny Test(Vivo Y66, Chrome, 1500)","maxTime":130,"minTime":0,"avgFps":"24"},{"name":"Bunny Add / Remove Test","maxTime":482,"minTime":0,"avgFps":"3"},{"name":"Bunny Tree Test","maxTime":342,"minTime":0,"avgFps":"11"},{"name":"Bunny Active / Inactive Test","maxTime":135,"minTime":0,"avgFps":"19"},{"name":"Bunny Transform Animation Test","maxTime":226,"minTime":0,"avgFps":"10"},{"name":"Bunny Frame Animation Test","maxTime":109,"minTime":0,"avgFps":"36"},{"name":"Bunny Transform Action Test","maxTime":157,"minTime":0,"avgFps":"12"}]},{"platform":"OS X","time":1516269853091,"data":[null,{"name":"Bunny Test(iPhone 6, Safari, 2600)","maxTime":12,"minTime":0,"avgFps":"60"},{"name":"Bunny Test(Vivo Y66, Chrome, 1500)","maxTime":6,"minTime":0,"avgFps":"60"},null,{"name":"Prefab Bunny Test(iPhone 6, Safari, 2600)","maxTime":9,"minTime":0,"avgFps":"60"},{"name":"Prefab Bunny Test(Vivo Y66, Chrome, 1500)","maxTime":7,"minTime":0,"avgFps":"60"},{"name":"Bunny Add / Remove Test","maxTime":34,"minTime":0,"avgFps":"60"},{"name":"Bunny Tree Test","maxTime":12,"minTime":0,"avgFps":"60"},{"name":"Bunny Active / Inactive Test","maxTime":12,"minTime":0,"avgFps":"60"},{"name":"Bunny Transform Animation Test","maxTime":11,"minTime":0,"avgFps":"60"},{"name":"Bunny Frame Animation Test","maxTime":8,"minTime":0,"avgFps":"60"},{"name":"Bunny Transform Action Test","maxTime":13,"minTime":0,"avgFps":"60"}]},{"platform":"iOS","time":1516270003979,"data":[null,{"name":"Bunny Test(iPhone 6, Safari, 2600)","maxTime":38,"minTime":0,"avgFps":"40"},null,null,{"name":"Prefab Bunny Test(iPhone 6, Safari, 2600)","maxTime":36,"minTime":0,"avgFps":"40"},null,{"name":"Bunny Add / Remove Test","maxTime":88,"minTime":0,"avgFps":"40"},{"name":"Bunny Tree Test","maxTime":49,"minTime":0,"avgFps":"30"},{"name":"Bunny Active / Inactive Test","maxTime":33,"minTime":0,"avgFps":"43"},{"name":"Bunny Transform Animation Test","maxTime":46,"minTime":0,"avgFps":"33"},{"name":"Bunny Frame Animation Test","maxTime":21,"minTime":0,"avgFps":"60"},{"name":"Bunny Transform Action Test","maxTime":47,"minTime":0,"avgFps":"30"}]},{"platform":"Android","time":1516270003698,"data":[null,null,{"name":"Bunny Test(Vivo Y66, Chrome, 1500)","maxTime":153,"minTime":0,"avgFps":"23"},null,null,{"name":"Prefab Bunny Test(Vivo Y66, Chrome, 1500)","maxTime":103,"minTime":0,"avgFps":"27"},{"name":"Bunny Add / Remove Test","maxTime":408,"minTime":0,"avgFps":"3"},{"name":"Bunny Tree Test","maxTime":133,"minTime":0,"avgFps":"17"},{"name":"Bunny Active / Inactive Test","maxTime":131,"minTime":0,"avgFps":"20"},{"name":"Bunny Transform Animation Test","maxTime":172,"minTime":0,"avgFps":"13"},{"name":"Bunny Frame Animation Test","maxTime":113,"minTime":0,"avgFps":"33"},{"name":"Bunny Transform Action Test","maxTime":148,"minTime":0,"avgFps":"15"}]},{"platform":"OS X","time":1516270007412,"data":[null,{"name":"Bunny Test(iPhone 6, Safari, 2600)","maxTime":10,"minTime":0,"avgFps":"60"},{"name":"Bunny Test(Vivo Y66, Chrome, 1500)","maxTime":7,"minTime":0,"avgFps":"60"},null,{"name":"Prefab Bunny Test(iPhone 6, Safari, 2600)","maxTime":10,"minTime":0,"avgFps":"60"},{"name":"Prefab Bunny Test(Vivo Y66, Chrome, 1500)","maxTime":13,"minTime":0,"avgFps":"60"},{"name":"Bunny Add / Remove Test","maxTime":34,"minTime":0,"avgFps":"60"},{"name":"Bunny Tree Test","maxTime":23,"minTime":0,"avgFps":"60"},{"name":"Bunny Active / Inactive Test","maxTime":15,"minTime":0,"avgFps":"60"},{"name":"Bunny Transform Animation Test","maxTime":11,"minTime":0,"avgFps":"60"},{"name":"Bunny Frame Animation Test","maxTime":6,"minTime":0,"avgFps":"60"},{"name":"Bunny Transform Action Test","maxTime":29,"minTime":0,"avgFps":"60"}]}];
+            var i, j, k, m, n;
             var platform_data = [];
             var xAxisData = [];
             var seriesData = [];
+            var legendsData = [];
+            var _data = null;
+            var _series = null;
+            var time, time_str;
             for (i = 0; i < platforms.length; i++) {
                 platform_data[i] = [];
                 xAxisData[i] = [];
                 seriesData[i] = [];
+                legendsData[i] = [];
             }
             for (i = 0; i < data.length; i++) {
                 for (j = 0; j < platforms.length; j++) {
@@ -72,51 +74,58 @@
                 }
             }
             for (i = 0; i < platform_data.length; i++) {
-                platform_data[i].sort((a, b) => {return a - b;});
+                platform_data[i].sort((a, b) => { return a.time - b.time; });
             }
-            
-            for (k = 0; k < platforms.length; k++) {
-                for (i = 0; i < platform_data[k].length; i++) {
-                    var time = new Date(platform_data[k][i].time);
+
+            for (i = 0; i < platforms.length; i++) {
+                for (j = 0; j < platform_data[i].length; j++) {
+                    var time = new Date(platform_data[i][j].time);
                     var time_str = time.getFullYear() + "/" + (time.getMonth() + 1) + "/" + time.getDate();
                     time_str += "\n" + time.getHours() + ":" + time.getMinutes() + ":" + time.getSeconds();
-                    xAxisData[k].push(time_str);
-                    var find_data = false;
-                    for (j = 0; j < platform_data[k][i].data.length; j++) {
-                        var _data = platform_data[k][i].data[j];
-                        if (!_data) {
-                            continue;
-                        }
-                        if (_data.name === "Bunny Tree Test") {
-                            seriesData[k].push(_data.avgFps);
-                            find_data = true;
-                        }
-                    }
-                    if (!find_data) {
-                        seriesData[k].push(0);
+                    xAxisData[i].push(time_str);
+                    for (k = 0; k < platform_data[i][j].data.length; k++) {
+                        _data = platform_data[i][j].data[k];
+                        if (_data && legendsData[i].indexOf(_data.name) === -1) {
+                            legendsData[i].push(_data.name);
+                            _series = {
+                                name: _data.name,
+                                data: [],
+                                type: "line"
+                            }
+                            seriesData[i].push(_series);
+                        }      
                     }
                 }
-                charts[k].hideLoading();
-                charts[k].setOption({
+                for (j = 0; j < platform_data[i].length; j++) {
+                    _data = platform_data[i][j];
+                    for (k = 0; k < legendsData[i].length; k++) {
+                        for (m = 0; m < _data.data.length; m++) {
+                            if (_data.data[m] && _data.data[m].name === legendsData[i][k]) {
+                               seriesData[i][k].data[j] = _data.data[m].avgFps;
+                            }
+                        }
+                        if (!seriesData[i][k].data[j]) {
+                            seriesData[i][k].data[j] = 0;
+                        }
+                    }
+                }
+                charts[i].hideLoading();
+                charts[i].setOption({
                     title: {
-                        text: "CocosCreator Performance Test" + "(" + platforms[k] + ")"
+                        text: "CocosCreator Performance Test" + "(" + platforms[i] + ")"
                     },
                     tooltip: {},
                     legend: {
-                        data: ["FPS"]
+                        data: legendsData[i]
                     },
                     xAxis: {
-                        data: xAxisData[k]
+                        data: xAxisData[i]
                     },
                     yAxis: {
                         max: 60,
                         min: 0
                     },
-                    series: [{
-                        name: "FPS",
-                        type: "line",
-                        data: seriesData[k]
-                    }]
+                    series: seriesData[i]
                 });
             }
         });
