@@ -131,7 +131,7 @@ cc.Class({
             testCaseInfo = config.AUTO_TEST_CASE[config.AUTO_CASE_CURSOR];
             if (testCaseInfo) {
                 config.CURRENT_CASE = testCaseInfo.index;
-                config.SCENE_ARGS = testCaseInfo.args;
+                config.setSceneArgs(testCaseInfo);
                 cc.director.loadScene(testCaseInfo.scene);
             }else {
                 cc.director.loadScene("main");

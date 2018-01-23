@@ -14,76 +14,131 @@ config.TEST_CASE = [
         scene: "bunnyTest", 
         auto: false, 
     },
-    { 
-        name: "Bunny Test(iPhone 6, Safari, 2600)", 
-        scene: "bunnyFixedCountTest", 
-        args: { count: 2600 }, 
-        platform: cc.sys.OS_IOS, 
-        auto: true, 
-    },
-    { 
-        name: "Bunny Test(Vivo Y66, Chrome, 1500)", 
-        scene: "bunnyFixedCountTest", 
-        args: { count:  1500 }, 
-        platform: cc.sys.OS_ANDROID, 
-        auto: true, 
+    {
+        name: "Bunny Fixed Count Test",
+        scene: "bunnyFixedCountTest",
+        args: { 
+            osx_chrome: { count: 5000 },
+            ios_safari: { count: 2600 },
+            ios_chrome: { count: 2600 },
+            android_chrome: { count: 1500 },
+            android_qq: {count: 1500},
+            default: {count: 1500}
+        },
+        auto: true,
     },
     { 
         name: "Prefab Bunny Test", 
         scene: "prefabBunnyTest", 
         auto: false,
     },
-    { 
-        name: "Prefab Bunny Test(iPhone 6, Safari, 2600)", 
-        scene: "prefabBunnyFixedCountTest", 
-        args: { count: 2600 }, 
-        platform: cc.sys.OS_IOS, 
-        auto: true, 
-    },
-    { 
-        name: "Prefab Bunny Test(Vivo Y66, Chrome, 1500)", 
-        scene: "prefabBunnyFixedCountTest", 
-        args: { count: 1500 }, 
-        platform: cc.sys.OS_ANDROID,
-        auto: true, 
+    {
+        name: "Prefab Bunny Fixed Count Test",
+        scene: "prefabBunnyFixedCountTest",
+        args: { 
+            osx_chrome: { count: 5000 },
+            ios_safari: { count: 2600 },
+            ios_chrome: { count: 2600 },
+            android_chrome: { count: 1500 },
+            android_qq: { count: 1500 },
+            default: { count: 1500 }
+        },
+        auto: true,
     },
     {
         name: "Bunny Add/Remove Test",
         scene: "bunnyDynamicTest",
-        args: { totalCount: 2500, dynamicCount: 100},
+        args: { 
+            default: { totalCount: 2500, dynamicCount: 100}
+        },
         auto: true,
     },
     {
         name: "Bunny Tree Test",
         scene: "bunnyTreeTest",
-        args: { depth: 4, countPerDepth: 6},
+        args: {
+            default: { depth: 4, countPerDepth: 6}
+        },
         auto: true,
     },
     {
         name: "Bunny Active/Inactive Test",
         scene: "bunnyActiveTest",
-        args: { depth: 5, countPerDepth: 5 },
+        args: {
+            default: { depth: 5, countPerDepth: 5 }
+        },
         auto: true,
     },
     {
         name: "Bunny Transform Animation Test",
         scene: "bunnyTransformAnimationTest",
-        args: { count: 2000 },
+        args: {
+            default: { count: 2000 }
+        },
         auto: true,
     },
     {
         name: "Bunny Frame Animation Test",
         scene: "bunnyFrameAnimationTest",
-        args: { count: 2000 },
+        args: {
+            default: { count: 2000 }
+        },
         auto: true,
     },
     {
         name: "Bunny Transform Action Test",
         scene: "bunnyTransformActionTest",
-        args: { count: 2000 },
+        args: {
+            default: { count: 2000 }
+        },
         auto: true,
     },
 ];
+
+config.setSceneArgs = function (testCaseInfo) {
+    let args = {};
+    if (testCaseInfo.args) {
+        switch (cc.sys.os) {
+            case cc.sys.OS_OSX:
+                switch (cc.sys.browserType) {
+                    case cc.sys.BROWSER_TYPE_CHROME:
+                        args = testCaseInfo.args.osx_chrome;
+                        break;
+                    default:
+                        break;
+                }
+                break;
+            case cc.sys.OS_IOS:
+                switch (cc.sys.browserType) {
+                    case cc.sys.BROWSER_TYPE_SAFARI:
+                        args = testCaseInfo.args.ios_safari;
+                        break;
+                    case cc.sys.BROWSER_TYPE_CHROME:
+                        args = testCaseInfo.args.ios_chrome;
+                        break;
+                    default:
+                        break;
+                }
+                break;
+            case cc.sys.OS_ANDROID:
+                switch (cc.sys.browserType) {
+                    case cc.sys.BROWSER_TYPE_CHROME:
+                        args = testCaseInfo.args.android_chrome;
+                        break;
+                    case cc.sys.BROWSER_TYPE_QQ:
+                        args = testCaseInfo.args.android_qq;
+                        break;
+                    default:
+                        break;
+                }
+                break;
+            default:
+                break;
+        }
+        args = args || testCaseInfo.args.default;
+    }
+    config.SCENE_ARGS = args;
+}
 
 config.CURRENT_CASE = -1;
 

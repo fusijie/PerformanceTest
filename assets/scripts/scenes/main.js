@@ -11,22 +11,10 @@ cc.Class({
     // use this for initialization
     onLoad: function () {
         config.CURRENT_CASE = -1;
-        config.PLATFORM_TEST_CASE = [];
+        this.menuItem.parent = null;
         for (let i = 0; i < config.TEST_CASE.length; i++) {
             let testCaseInfo = config.TEST_CASE[i];
             testCaseInfo.index = i;
-            if (cc.sys.os === cc.sys.OS_ANDROID || cc.sys.os === cc.sys.OS_IOS) {
-                if (!testCaseInfo.platform || testCaseInfo.platform === cc.sys.os) {
-                    config.PLATFORM_TEST_CASE.push(testCaseInfo);
-                }    
-            }else {
-                config.PLATFORM_TEST_CASE = config.TEST_CASE;
-            }
-        }
-
-        this.menuItem.parent = null;
-        for (let i = 0; i < config.PLATFORM_TEST_CASE.length; i++) {
-            let testCaseInfo = config.PLATFORM_TEST_CASE[i];
             let menuItem = cc.instantiate(this.menuItem);
             let name = menuItem.getChildByName("name");
             let toggle = menuItem.getChildByName("toggle");
@@ -46,7 +34,7 @@ cc.Class({
             return;
         }
         config.CURRENT_CASE = testCaseIndex;
-        config.SCENE_ARGS = testCaseInfo.args;
+        config.setSceneArgs(testCaseInfo);
         cc.director.loadScene(testCaseInfo.scene);
     },
 
@@ -54,12 +42,14 @@ cc.Class({
         config.IS_AUTO_TESTING = true;
         config.AUTO_CASE_CURSOR = 0;
         config.AUTO_TEST_CASE = [];
-        config.AUTO_TEST_RESULT = {};
-        config.AUTO_TEST_RESULT.platform = cc.sys.os;
-        config.AUTO_TEST_RESULT.time = Date.now();
-        config.AUTO_TEST_RESULT.data = [];
-        for (let i = 0; i < config.PLATFORM_TEST_CASE.length; i++) {
-            let testCaseInfo = config.PLATFORM_TEST_CASE[i];
+        config.AUTO_TEST_RESULT = {
+            platform: cc.sys.os,
+            browser: cc.sys.browserType,
+            time: Date.now(),
+            data: []
+        };
+        for (let i = 0; i < config.TEST_CASE.length; i++) {
+            let testCaseInfo = config.TEST_CASE[i];
             if (testCaseInfo.auto) {
                 config.AUTO_TEST_CASE.push(testCaseInfo);
             }
@@ -67,7 +57,7 @@ cc.Class({
         if (config.AUTO_TEST_CASE.length) {
             let testCaseInfo = config.AUTO_TEST_CASE[config.AUTO_CASE_CURSOR];
             config.CURRENT_CASE = testCaseInfo.index;
-            config.SCENE_ARGS = testCaseInfo.args;
+            config.setSceneArgs(testCaseInfo);
             cc.director.loadScene(testCaseInfo.scene);
         }
     },
