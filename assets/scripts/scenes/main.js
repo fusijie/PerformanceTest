@@ -43,7 +43,7 @@ cc.Class({
         config.AUTO_CASE_CURSOR = 0;
         config.AUTO_TEST_CASE = [];
         config.AUTO_TEST_RESULT = {
-            platform: cc.sys.os,
+            os: cc.sys.os,
             browser: cc.sys.browserType,
             time: Date.now(),
             data: []

@@ -4,7 +4,6 @@ let config =  {};
  * name: test case name.
  * scene: test case scene name.
  * args: global scene args, you can use it in the scene component.
- * platform: the specified platform, default all platforms.
  * auto: it's auto test or not.
  * desc: test case description.
  */

@@ -1,8 +1,22 @@
 (()=>{
     //获取数据
     $.post("http://localhost:30000/get_result").done(function (data) {
-        //定义平台
-        let platforms = ["OS X", "Windows", "iOS", "Android"];
+        let test_case_names = [];
+        let platform_names = [];
+        data = data.sort((a, b)=>{return a.time - b.time;});
+        for (let i = 0; i < data.length; i++) {
+            data[i].platform = data[i].os + " " + data[i].browser;
+            if (platform_names.indexOf(data[i].platform) === -1) {
+                platform_names.push(data[i].platform);
+            }
+            for (let j = 0; j < data[i].data.length; j++) {
+                let _data = data[i].data[j];
+                if (_data && test_case_names.indexOf(_data.name) === -1) {
+                    test_case_names.push(_data.name);
+                }
+            }
+        }
+
         let get_time_str = function (time) {
             let _prefix0 = function (s) {
                 return s < 10 ? '0' + s : s;
@@ -12,63 +26,64 @@
             time_str += "\n" + _prefix0(_time.getHours()) + ":" + _prefix0(_time.getMinutes()) + ":" + _prefix0(_time.getSeconds());
             return time_str;
         }
-        for (let i = 0; i < platforms.length; i++) {
-            let div = document.createElement("div");
-            div.id = platforms[i] + "_chart";
-            div.style = "width: 1200px;height:800px;";
-            $("#ebox").append(div);
 
-            let chart = echarts.init(div);
-
-            let platform_data = [];
+        for (let i = 0; i < test_case_names.length; i++) {
+            let xAxisTime = [];
             let xAxisData = [];
             let seriesData = [];
             let legendsData = [];
 
-            //数据分类
+            //填充xAxisData
             for (let j = 0; j < data.length; j++) {
-                if (data[j].platform === platforms[i]) {
-                    platform_data.push(data[j]);
-                }
+                xAxisTime.push(data[j].time);
+                xAxisData.push(get_time_str(data[j].time));
             }
-            platform_data.sort((a, b) => { return a.time - b.time; });
-            for (let j = 0; j < platform_data.length; j++) {
-                let _data = platform_data[j];
 
-                //填充xAxisData
-                xAxisData.push(get_time_str(_data.time));
-
-                //填充legendsData
-                for (let k = 0; k < _data.data.length; k++) {
-                    if (_data.data[k] && legendsData.indexOf(_data.data[k].name) === -1) {
-                        legendsData.push(_data.data[k].name);
-                        let _series = {
-                            name: _data.data[k].name,
-                            data: [],
-                            type: "line",
-                        };
-                        seriesData.push(_series);
-                    }
+            //填充 legendsData
+            for (let j = 0; j < platform_names.length; j++) {
+                legendsData.push(platform_names[j]);
+                let series = {
+                    name: platform_names[j],
+                    data: [],
+                    type: "line"
                 }
+                seriesData.push(series);
             }
+
             //填充seriesData
-            for (let j = 0; j < platform_data.length; j++) {
-                let _data = platform_data[j];
-                for (let k = 0; k < legendsData.length; k++) {
-                    for (let m = 0; m < _data.data.length; m++) {
-                        if (_data.data[m] && _data.data[m].name === legendsData[k]) {
-                            seriesData[k].data[j] = _data.data[m].avgValue;
+            for (let j = 0; j < xAxisTime.length; j++) {
+                for (let k = 0; k < seriesData.length; k++) {
+                    let is_find = false;
+                    for (let m = 0; m < data.length; m++) {
+                        if (data[m].time === xAxisTime[j] && data[m].platform === seriesData[k].name) {
+                            for (let n = 0; n < data[m].data.length; n++) {
+                                let _data = data[m].data[n];
+                                if (_data && _data.name === test_case_names[i]) {
+                                    is_find = true;
+                                    seriesData[k].data.push(_data.avgValue);
+                                    break;
+                                }
+                            }
+                        }
+                        if (is_find) {
+                            break;
                         }
                     }
-                    if (!seriesData[k].data[j]) {
-                        seriesData[k].data[j] = 0;
+                    if (!is_find) {
+                        seriesData[k].data.push(null);
                     }
                 }
             }
+
             //设置chart
+            let div = document.createElement("div");
+            div.id = test_case_names[i] + " Chart";
+            div.style = "width: 1200px;height:800px;";
+            $("#ebox").append(div);
+            let chart = echarts.init(div);
             chart.setOption({
                 title: {
-                    text: "CocosCreator Performance Test" + "(" + platforms[i] + ")",
+                    text: test_case_names[i],
                 },
                 tooltip: {
                     axisPointer: {
