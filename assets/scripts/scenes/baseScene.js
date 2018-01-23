@@ -22,13 +22,13 @@ cc.Class({
             if (!this.isTesting) {
                 return;
             }
-            this.beforeUpdateTime = Date.now();
+            this.beforeUpdateTime = performance.now();
         });
         cc.director.on(cc.Director.EVENT_AFTER_DRAW, ()=>{
             if (!this.isTesting || this.beforeUpdateTime === 0) {
                 return;
             }
-            this.afterDrawTime = Date.now();
+            this.afterDrawTime = performance.now();
             this.durationTimeArr.push(this.afterDrawTime - this.beforeUpdateTime);
         });
     },
@@ -91,6 +91,7 @@ cc.Class({
     },
 
     onClickClose: function () {
+        this.resetTestConfig();
         cc.director.loadScene("main");
     },
 
@@ -114,17 +115,17 @@ cc.Class({
             }
             totalValue += value;
         }
+        maxValue = maxValue.toFixed(0);
+        minValue = minValue.toFixed(0);
         avgValue = (totalValue / this.durationTimeArr.length).toFixed(0);
-        let avgFps = Math.min(1000 / avgValue , 60);
-        avgFps = Math.max(avgFps, 0).toFixed(0);
-        result += `max time: ${maxValue}, min time: ${minValue}, avg fps: ${avgFps}`;
+        result += `max time: ${maxValue}, min time: ${minValue}, avg time: ${avgValue}`;
         if (config.IS_AUTO_TESTING) {
             let testCaseInfo = config.TEST_CASE[config.CURRENT_CASE];
             config.AUTO_TEST_RESULT.data[testCaseInfo.index] = {
                 name: testCaseInfo.name,
                 maxTime: maxValue,
                 minTime: minValue,
-                avgFps: avgFps
+                avgValue: avgValue
             }
             config.AUTO_CASE_CURSOR ++;
             testCaseInfo = config.AUTO_TEST_CASE[config.AUTO_CASE_CURSOR];

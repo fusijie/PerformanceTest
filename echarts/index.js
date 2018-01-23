@@ -45,7 +45,7 @@
                         let _series = {
                             name: _data.data[k].name,
                             data: [],
-                            type: "line"
+                            type: "line",
                         };
                         seriesData.push(_series);
                     }
@@ -57,7 +57,7 @@
                 for (let k = 0; k < legendsData.length; k++) {
                     for (let m = 0; m < _data.data.length; m++) {
                         if (_data.data[m] && _data.data[m].name === legendsData[k]) {
-                            seriesData[k].data[j] = _data.data[m].avgFps;
+                            seriesData[k].data[j] = _data.data[m].avgValue;
                         }
                     }
                     if (!seriesData[k].data[j]) {
@@ -70,7 +70,12 @@
                 title: {
                     text: "CocosCreator Performance Test" + "(" + platforms[i] + ")",
                 },
-                tooltip: {},
+                tooltip: {
+                    axisPointer: {
+                        type: "cross",
+                    },
+                    formatter: '{a}<br />perform time: {c}ms',
+                },
                 legend: {
                     data: legendsData,
                     type: "scroll",
@@ -82,8 +87,6 @@
                     data: xAxisData
                 },
                 yAxis: {
-                    max: 60,
-                    min: 0
                 },
                 series: seriesData
             });
