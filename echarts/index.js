@@ -80,6 +80,7 @@
             chart.setOption({
                 title: {
                     text: test_case_names[i],
+                    left: "center"
                 },
                 tooltip: {
                     axisPointer: {
