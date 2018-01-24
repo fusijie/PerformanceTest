@@ -53,7 +53,7 @@ config.TEST_CASE = [
         auto: true,
     },
     {
-        name: "Bunny Tree Test",
+        name: "Bunny Transform Tree Test",
         scene: "bunnyTreeTest",
         args: {
             default: { depth: 4, countPerDepth: 6}

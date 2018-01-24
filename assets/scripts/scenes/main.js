@@ -6,6 +6,7 @@ cc.Class({
     properties: {
         scrollViewContent: cc.Node,
         menuItem: cc.Node,
+        editBoxSN: cc.EditBox,
     },
 
     // use this for initialization
@@ -39,13 +40,18 @@ cc.Class({
     },
 
     onClickAutoTest: function () {
+        let sn = this._getSN();
+        if (!sn) {
+            alert("Please input SN...");
+            return;
+        }
         config.IS_AUTO_TESTING = true;
         config.AUTO_CASE_CURSOR = 0;
         config.AUTO_TEST_CASE = [];
         config.AUTO_TEST_RESULT = {
             os: cc.sys.os,
             browser: cc.sys.browserType,
-            time: Date.now(),
+            sn: sn,
             data: []
         };
         for (let i = 0; i < config.TEST_CASE.length; i++) {
@@ -61,5 +67,20 @@ cc.Class({
             cc.director.loadScene(testCaseInfo.scene);
         }
     },
+
+    _getSN: function () {
+        let ebSN = parseInt(this.editBoxSN.string);
+        if (isNaN(ebSN)) {
+            return null;
+        }
+        let _prefixInteger = function(num, length) {
+            return ("000000000" + num).substr(-length);
+        };
+        let time = new Date();
+        let sn = "";
+        sn += time.getFullYear() + "" + _prefixInteger((time.getMonth() + 1), 2) + "" + _prefixInteger(time.getDate(), 2);
+        sn += _prefixInteger(ebSN, 4);
+        return sn;
+    }
     
 });

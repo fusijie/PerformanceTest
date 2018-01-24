@@ -1,9 +1,13 @@
 (()=>{
+    String.prototype.splice = function (idx, rem, str) {
+        return this.slice(0, idx) + str + this.slice(idx + Math.abs(rem));
+    };
+
     //获取数据
     $.post("http://localhost:30000/get_result").done(function (data) {
         let test_case_names = [];
         let platform_names = [];
-        data = data.sort((a, b)=>{return a.time - b.time;});
+        data = data.sort((a, b)=>{return a.sn - b.sn;});
         for (let i = 0; i < data.length; i++) {
             data[i].platform = data[i].os + " " + data[i].browser;
             if (platform_names.indexOf(data[i].platform) === -1) {
@@ -17,16 +21,6 @@
             }
         }
 
-        let get_time_str = function (time) {
-            let _prefix0 = function (s) {
-                return s < 10 ? '0' + s : s;
-            }
-            let _time = new Date(time);
-            let time_str = _time.getFullYear() + "/" + (_time.getMonth() + 1) + "/" + _time.getDate();
-            time_str += "\n" + _prefix0(_time.getHours()) + ":" + _prefix0(_time.getMinutes()) + ":" + _prefix0(_time.getSeconds());
-            return time_str;
-        }
-
         for (let i = 0; i < test_case_names.length; i++) {
             let xAxisTime = [];
             let xAxisData = [];
@@ -35,8 +29,8 @@
 
             //填充xAxisData
             for (let j = 0; j < data.length; j++) {
-                xAxisTime.push(data[j].time);
-                xAxisData.push(get_time_str(data[j].time));
+                xAxisTime.push(data[j].sn);
+                xAxisData.push((data[j].sn + "").splice(8, 0, '\n'));
             }
 
             //填充 legendsData
@@ -55,7 +49,7 @@
                 for (let k = 0; k < seriesData.length; k++) {
                     let is_find = false;
                     for (let m = 0; m < data.length; m++) {
-                        if (data[m].time === xAxisTime[j] && data[m].platform === seriesData[k].name) {
+                        if (data[m].sn === xAxisTime[j] && data[m].platform === seriesData[k].name) {
                             for (let n = 0; n < data[m].data.length; n++) {
                                 let _data = data[m].data[n];
                                 if (_data && _data.name === test_case_names[i]) {
