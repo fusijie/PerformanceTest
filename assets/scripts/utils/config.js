@@ -50,7 +50,7 @@ config.TEST_CASE = [
         args: { 
             default: { totalCount: 2500, dynamicCount: 100}
         },
-        auto: true,
+        auto: false,
     },
     {
         name: "Bunny Transform Tree Test",

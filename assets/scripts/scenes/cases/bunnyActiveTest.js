@@ -91,9 +91,11 @@ cc.Class({
             this.number.string = count;
             curDepth++;
         }
-        for (i = 0; i < this.bunnys[depth - 1].length; i++) {
-            bunny = this.bunnys[depth - 1][i];
-            bunny.active = Math.random() >= 0.5;
+        for (let i = 0; i < this.bunnys.length; i++) {
+            for (let j = 0; j < this.bunnys[i].length; j++) {
+                bunny = this.bunnys[i][j];
+                bunny.active = Math.random() >= 0.5;
+            }
         }
     },
 });
