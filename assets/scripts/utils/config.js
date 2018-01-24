@@ -124,7 +124,7 @@ config.setSceneArgs = function (testCaseInfo) {
                     case cc.sys.BROWSER_TYPE_CHROME:
                         args = testCaseInfo.args.android_chrome;
                         break;
-                    case cc.sys.BROWSER_TYPE_QQ:
+                    case cc.sys.BROWSER_TYPE_MOBILE_QQ:
                         args = testCaseInfo.args.android_qq;
                         break;
                     default:

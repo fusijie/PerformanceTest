@@ -29,8 +29,10 @@
 
             //填充xAxisData
             for (let j = 0; j < data.length; j++) {
-                xAxisTime.push(data[j].sn);
-                xAxisData.push((data[j].sn + "").splice(8, 0, '\n'));
+                if (xAxisTime.indexOf(data[j].sn) === -1) {
+                    xAxisTime.push(data[j].sn);
+                    xAxisData.push((data[j].sn + "").splice(8, 0, '\n'));
+                }
             }
 
             //填充 legendsData
