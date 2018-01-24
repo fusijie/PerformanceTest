@@ -12,20 +12,6 @@
       "x": [
         {
           "frame": 0,
-          "value": -320
-        },
-        {
-          "frame": 1,
-          "value": 320
-        },
-        {
-          "frame": 2,
-          "value": -320
-        }
-      ],
-      "y": [
-        {
-          "frame": 0,
           "value": -240
         },
         {
@@ -35,6 +21,20 @@
         {
           "frame": 2,
           "value": -240
+        }
+      ],
+      "y": [
+        {
+          "frame": 0,
+          "value": -320
+        },
+        {
+          "frame": 1,
+          "value": 320
+        },
+        {
+          "frame": 2,
+          "value": -320
         }
       ],
       "scaleX": [

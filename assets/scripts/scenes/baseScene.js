@@ -47,7 +47,7 @@ cc.Class({
         let testCaseInfo = config.TEST_CASE[config.CURRENT_CASE];
         let title = this._createLabel(`${config.CURRENT_CASE + 1}. ${testCaseInfo.name}`);
         title.x = 0;
-        title.y = 230;
+        title.y = 420;
         title.zIndex = config.HIGHEST_ZINDEX;
         title.parent = this.node;
 
@@ -55,20 +55,20 @@ cc.Class({
         cc.loader.loadRes("internal/default_btn_normal", cc.SpriteFrame, (err, spriteFrame) => {
             let testBtn = this._createButton("Test", spriteFrame, this.node, subScriptName, "onClickTest");
             testBtn.parent = this.node;
-            testBtn.x = 360;
-            testBtn.y = 180;
+            testBtn.x = -100;
+            testBtn.y = 340;
             testBtn.zIndex = config.HIGHEST_ZINDEX;
             let closeBtn = this._createButton("Back", spriteFrame, this.node, subScriptName, "onClickClose");
             closeBtn.parent = this.node;
-            closeBtn.x = 360;
-            closeBtn.y = 130;
+            closeBtn.x = 100;
+            closeBtn.y = 340;
             closeBtn.zIndex = config.HIGHEST_ZINDEX;
         });
 
         //test result
         let result = this._createLabel("", cc.Color.WHITE, 20);
         result.x = 0;
-        result.y = -280;
+        result.y = -420;
         result.parent = this.node;
         result.zIndex = config.HIGHEST_ZINDEX;
         this.labelResult = result;

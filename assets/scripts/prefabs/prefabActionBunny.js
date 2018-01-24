@@ -23,8 +23,8 @@ cc.Class({
                     cc.rotateBy(1, -360, -360)
                 ),
                 cc.sequence(
-                    cc.moveTo(1, 320, 240),
-                    cc.moveTo(1, -320, -240)
+                    cc.moveTo(1, 240, 320),
+                    cc.moveTo(1, -240, -320)
                 )   
             ).repeatForever()
         );
@@ -58,8 +58,8 @@ cc.Class({
         }
 
         this.node.getComponent(cc.Sprite).spriteFrame = bunnySpriteFrame;
-        this.node.x = -320;
-        this.node.y = -240;
+        this.node.x = -240;
+        this.node.y = -320;
         this.node.anchorY = 1;
         //bunny.alpha = 0.3 + Math.random() * 0.7;
         this.node.scale = 0.5;

@@ -92,6 +92,11 @@ config.TEST_CASE = [
         },
         auto: true,
     },
+    {
+        name: "UI Test",
+        scene: "uiTest",
+        auto: true,
+    },
 ];
 
 config.setSceneArgs = function (testCaseInfo) {

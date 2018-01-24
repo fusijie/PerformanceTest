@@ -87,8 +87,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 960,
-      "height": 640
+      "width": 640,
+      "height": 960
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -96,8 +96,8 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 480,
-      "y": 320
+      "x": 320,
+      "y": 480
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -148,8 +148,8 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 440,
-      "y": -263
+      "x": 300,
+      "y": -420
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -190,8 +190,8 @@
     "_enabled": true,
     "_designResolution": {
       "__type__": "cc.Size",
-      "width": 960,
-      "height": 640
+      "width": 640,
+      "height": 960
     },
     "_fitWidth": false,
     "_fitHeight": true
@@ -204,9 +204,6 @@
       "__id__": 2
     },
     "_enabled": true,
-    "tex": {
-      "__uuid__": "ae5d9a0a-1576-498f-90da-d0a24217b766"
-    },
     "prefabBunny": {
       "__uuid__": "cfe24d5f-0df5-4084-a8ce-45d4216f632a"
     },
