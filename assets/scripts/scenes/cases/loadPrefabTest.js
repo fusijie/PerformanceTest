@@ -16,7 +16,12 @@ cc.Class({
         const gamePrefab = "uiTest/prefab/gamePrefab";
         let _releasePrefab = (prefab) => {
             let list = cc.loader.getDependsRecursively(prefab._uuid);
-            //TODO: release all res.
+            list.forEach((item, i, arr)=>{
+                let load_item = cc.loader.getItem(item);
+                if (load_item && load_item.content && load_item.content instanceof cc.SpriteFrame) {
+                    cc.loader.releaseAsset(load_item.content);
+                }
+            });
             cc.loader.releaseRes(gamePrefab);
         }
         let _loadPrefab = (count) => {
@@ -26,6 +31,7 @@ cc.Class({
                     let afterLoadTime = performance.now();
                     this.durationTimeArr.push(afterLoadTime - beforeLoadTime);
                     count --;
+                    _releasePrefab(prefab);
                     if (count > 0) {
                         _loadPrefab(count);
                     }else {

@@ -81,7 +81,7 @@ cc.Class({
     _calculateReuslt: function () {
         let result = "result: "
         let maxValue = 0;
-        let minValue = 0;
+        let minValue = this.durationTimeArr[0];
         let avgValue = 0;
         let totalValue = 0;
         for (let i = 0; i < this.durationTimeArr.length; i++) {
