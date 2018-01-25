@@ -42,5 +42,37 @@ utils.post = function (url, args) {
     console.log("Post 请求: " + url);
 };
 
+utils.createLabel = function (string, color, fontSize) {
+    string = string || "";
+    color = color || cc.Color.WHITE;
+    fontSize = fontSize || 40;
+    let labelNode = new cc.Node();
+    labelNode.color = color;
+    let labelComponent = labelNode.addComponent(cc.Label);
+    labelComponent.lineHeight = fontSize = labelComponent.fontSize = fontSize;
+
+    labelComponent.string = string;
+    return labelNode;
+};
+
+utils.createButton = function (name, spriteFrame, target, componentName, handlerName) {
+    let buttonNode = new cc.Node();
+    let buttonComponent = buttonNode.addComponent(cc.Button);
+    let eventHandler = new cc.Component.EventHandler();
+    eventHandler.component = componentName;
+    eventHandler.handler = handlerName;
+    eventHandler.target = target;
+    buttonComponent.clickEvents.push(eventHandler);
+    buttonComponent.transition = cc.Button.Transition.SCALE;
+    let spriteComponent = buttonNode.addComponent(cc.Sprite);
+    spriteComponent.spriteFrame = spriteFrame;
+    spriteComponent.sizeMode = cc.Sprite.SizeMode.CUSTOM;
+    spriteComponent.trim = true;
+    let labelNode = this.createLabel(name, cc.Color.BLACK, 20);
+    labelNode.parent = buttonNode;
+    buttonNode.width = 100;
+    buttonNode.height = 40;
+    return buttonNode;
+};
 
 module.exports = utils;

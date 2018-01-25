@@ -1,4 +1,4 @@
-const baseScene = require("baseScene");
+const baseRenderScene = require("baseRenderScene");
 let config = require("config");
 
 let bunnyType = 0;
@@ -7,7 +7,7 @@ let count = 0;
 let amount = 0;
 
 cc.Class({
-    extends: baseScene,
+    extends: baseRenderScene,
 
     properties: {
         prefabBunny: cc.Prefab,

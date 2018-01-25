@@ -1,8 +1,8 @@
-const baseScene = require("baseScene");
+const baseLoaderScene = require("baseLoaderScene");
 let config = require("config");
 
 cc.Class({
-    extends: baseScene,
+    extends: baseLoaderScene,
 
     properties: {
     },
@@ -10,25 +10,26 @@ cc.Class({
     // use this for initialization
     onLoad: function () {
         this._super(this.name.match(/<(\S*)>/)[1]);
-        this.loadPrefab();
     },
 
-    loadPrefab: function () {
+    loadRes: function (finish_cb) {
         const gamePrefab = "uiTest/prefab/gamePrefab";
-        let _releasePrefab = function (prefab) {
+        let _releasePrefab = (prefab) => {
             let list = cc.loader.getDependsRecursively(prefab._uuid);
             //TODO: release all res.
             cc.loader.releaseRes(gamePrefab);
         }
-        let _loadPrefab = function (count) {
-            let time_0 = performance.now();
+        let _loadPrefab = (count) => {
+            let beforeLoadTime = performance.now();
             cc.loader.loadRes(gamePrefab, (err, prefab) => {
                 if (!err) {
-                    let time_1 = performance.now();
-                    console.log(time_1 - time_0);
+                    let afterLoadTime = performance.now();
+                    this.durationTimeArr.push(afterLoadTime - beforeLoadTime);
                     count --;
                     if (count > 0) {
                         _loadPrefab(count);
+                    }else {
+                        finish_cb && finish_cb();
                     }
                 }
             });

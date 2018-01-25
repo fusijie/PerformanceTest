@@ -1,4 +1,4 @@
-const baseScene = require("baseScene");
+const baseRenderScene = require("baseRenderScene");
 let config = require("config");
 
 let bunnyType = 0;
@@ -14,7 +14,7 @@ let depth = 0;
 let curDepth = 0;
 
 cc.Class({
-    extends: baseScene,
+    extends: baseRenderScene,
 
     properties: {
         tex: cc.Texture2D,

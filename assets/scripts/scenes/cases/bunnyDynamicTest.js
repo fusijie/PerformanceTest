@@ -1,4 +1,4 @@
-const baseScene = require("baseScene");
+const baseRenderScene = require("baseRenderScene");
 let config = require("config");
 
 let bunnyType = 0;
@@ -15,7 +15,7 @@ let amount = 0;
 let dynamicCount = 0;
 
 cc.Class({
-    extends: baseScene,
+    extends: baseRenderScene,
 
     properties: {
         tex: cc.Texture2D,

@@ -1,8 +1,8 @@
-const baseScene = require("baseScene");
+const baseRenderScene = require("baseRenderScene");
 let config = require("config");
 
 cc.Class({
-    extends: baseScene,
+    extends: baseRenderScene,
 
     properties: {
     },

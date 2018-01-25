@@ -93,15 +93,15 @@ config.TEST_CASE = [
         auto: true,
     },
     {
+        name: "Load Prefab Test",
+        scene: "loadPrefabTest",
+        auto: true,
+    },
+    {
         name: "UI Test",
         scene: "uiTest",
         auto: true,
     },
-    {
-        name: "Load Prefab Test",
-        scene: "loadPrefabTest",
-        auto: true,
-    }
 ];
 
 config.setSceneArgs = function (testCaseInfo) {
