@@ -56,6 +56,6 @@ cc.Class({
                 }
             });
         };
-        _loadPrefab(10);
+        _loadPrefab(3);
     }
 });
