@@ -56,6 +56,6 @@ cc.Class({
                 }
             });
         };
-        _loadPrefab(3);
+        _loadPrefab(config.SCENE_ARGS.count);
     }
 });

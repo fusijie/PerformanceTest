@@ -22,7 +22,7 @@ config.TEST_CASE = [
             ios_chrome: { count: 2600 },
             android_chrome: { count: 1500 },
             android_qq: {count: 1500},
-            default: {count: 1500}
+            default: { count: 5000}
         },
         auto: true,
     },
@@ -40,7 +40,7 @@ config.TEST_CASE = [
             ios_chrome: { count: 2600 },
             android_chrome: { count: 1500 },
             android_qq: { count: 1500 },
-            default: { count: 1500 }
+            default: { count: 5000 }
         },
         auto: true,
     },
@@ -48,7 +48,12 @@ config.TEST_CASE = [
         name: "Bunny Add/Remove Test",
         scene: "bunnyDynamicTest",
         args: { 
-            default: { totalCount: 2500, dynamicCount: 100}
+            osx_chrome: { totalCount: 5000, dynamicCount: 100 },
+            ios_safari: { totalCount: 2500, dynamicCount: 100 },
+            ios_chrome: { totalCount: 2500, dynamicCount: 100 },
+            android_chrome: { totalCount: 1500, dynamicCount: 100 },
+            android_qq: { totalCount: 1500, dynamicCount: 100 },
+            default: { totalCount: 5000, dynamicCount: 100}
         },
         auto: false,
     },
@@ -56,7 +61,12 @@ config.TEST_CASE = [
         name: "Bunny Transform Tree Test",
         scene: "bunnyTreeTest",
         args: {
-            default: { depth: 4, countPerDepth: 6}
+            osx_chrome: { depth: 5, countPerDepth: 6 },
+            ios_safari: { depth: 4, countPerDepth: 6 },
+            ios_chrome: { depth: 4, countPerDepth: 6 },
+            android_chrome: { depth: 4, countPerDepth: 5 },
+            android_qq: { depth: 4, countPerDepth: 5 },
+            default: { depth: 5, countPerDepth: 6}
         },
         auto: true,
     },
@@ -64,7 +74,12 @@ config.TEST_CASE = [
         name: "Bunny Active/Inactive Test",
         scene: "bunnyActiveTest",
         args: {
-            default: { depth: 5, countPerDepth: 5 }
+            osx_chrome: { depth: 5, countPerDepth: 6 },
+            ios_safari: { depth: 4, countPerDepth: 6 },
+            ios_chrome: { depth: 4, countPerDepth: 6 },
+            android_chrome: { depth: 4, countPerDepth: 5 },
+            android_qq: { depth: 4, countPerDepth: 5 },
+            default: { depth: 5, countPerDepth: 6 }
         },
         auto: true,
     },
@@ -72,7 +87,12 @@ config.TEST_CASE = [
         name: "Bunny Transform Animation Test",
         scene: "bunnyTransformAnimationTest",
         args: {
-            default: { count: 2000 }
+            osx_chrome: { count: 5000 },
+            ios_safari: { count: 2600 },
+            ios_chrome: { count: 2600 },
+            android_chrome: { count: 1500 },
+            android_qq: { count: 1500 },
+            default: { count: 5000 }
         },
         auto: true,
     },
@@ -80,7 +100,12 @@ config.TEST_CASE = [
         name: "Bunny Frame Animation Test",
         scene: "bunnyFrameAnimationTest",
         args: {
-            default: { count: 2000 }
+            osx_chrome: { count: 5000 },
+            ios_safari: { count: 2600 },
+            ios_chrome: { count: 2600 },
+            android_chrome: { count: 1500 },
+            android_qq: { count: 1500 },
+            default: { count: 5000 }
         },
         auto: true,
     },
@@ -88,13 +113,26 @@ config.TEST_CASE = [
         name: "Bunny Transform Action Test",
         scene: "bunnyTransformActionTest",
         args: {
-            default: { count: 2000 }
+            osx_chrome: { count: 5000 },
+            ios_safari: { count: 2600 },
+            ios_chrome: { count: 2600 },
+            android_chrome: { count: 1500 },
+            android_qq: { count: 1500 },
+            default: { count: 5000 }
         },
         auto: true,
     },
     {
         name: "Load Prefab Test",
         scene: "loadPrefabTest",
+        args: {
+            osx_chrome: { count: 10 },
+            ios_safari: { count: 3 },
+            ios_chrome: { count: 3 },
+            android_chrome: { count: 3 },
+            android_qq: { count: 3 },
+            default: { count: 10 }
+        },
         auto: true,
     },
     {
