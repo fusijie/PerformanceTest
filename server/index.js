@@ -2,14 +2,10 @@ let express = require("express");
 let bodyParser = require("body-parser");
 let cors = require("cors");
 let mysql = require("mysql");
+let fs = require("fs");
 
 let data = [];
-let mysql_opt = {
-	host: '127.0.0.1',
-	user: 'root',
-	password: '',
-	database: 'PerformanceTest'
-};
+let mysql_opt = JSON.parse(fs.readFileSync(__dirname + "/config.json"));
 
 // load data from mysql.
 function load_data() {
