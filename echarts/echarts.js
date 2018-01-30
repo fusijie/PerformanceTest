@@ -4,7 +4,7 @@
     };
 
     //获取数据
-    $.post("http://localhost:30000/get_result").done(function (data) {
+    $.post(`http://${window.location.hostname}:30000/get_result`).done(function (data) {
         let test_case_names = [];
         let platform_names = [];
         data = data.sort((a, b)=>{return a.sn - b.sn;});
