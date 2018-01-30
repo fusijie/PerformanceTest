@@ -79,6 +79,8 @@ cc.Class({
     },
 
     _calculateReuslt: function () {
+        this.durationTimeArr = this.durationTimeArr.sort((a, b)=>{return a - b;});
+        this.durationTimeArr = this.durationTimeArr.slice(Math.floor(this.durationTimeArr.length * 0.1), Math.floor(this.durationTimeArr.length * 0.9));
         let result = "result: "
         let maxValue = 0;
         let minValue = this.durationTimeArr[0];
