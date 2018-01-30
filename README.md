@@ -21,7 +21,7 @@
 
 ##### 4. Check
 
-* open url `http:<ip>:30001`, you can see `no data for now` if mysql has no data.
+* open url `http://<ip>:30001`, you can see `no data for now` if mysql has no data.
 
 ## 2.Test
 
