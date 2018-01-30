@@ -127,10 +127,10 @@ config.TEST_CASE = [
         scene: "loadPrefabTest",
         args: {
             osx_chrome: { count: 10 },
-            ios_safari: { count: 3 },
-            ios_chrome: { count: 3 },
-            android_chrome: { count: 3 },
-            android_qq: { count: 3 },
+            ios_safari: { count: 10 },
+            ios_chrome: { count: 10 },
+            android_chrome: { count: 10 },
+            android_qq: { count: 10 },
             default: { count: 10 }
         },
         auto: true,
