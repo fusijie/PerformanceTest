@@ -5,6 +5,14 @@
 
     //获取数据
     $.post(`http://${window.location.hostname}:30000/get_result`).done(function (data) {
+        if (!Array.isArray(data)) {
+            document.write("request data error.");
+            return;
+        }
+        if (data.length === 0) {
+            document.write("no data for now.");
+            return;
+        }
         let test_case_names = [];
         let platform_names = [];
         data = data.sort((a, b)=>{return a.sn - b.sn;});
